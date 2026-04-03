@@ -1,6 +1,5 @@
 package model;
 
-import javax.print.DocFlavor.STRING;
 
 public class Student {
 
