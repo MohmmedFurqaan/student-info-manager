@@ -61,7 +61,14 @@ public class Main {
             } catch (InputMismatchException e) {
                 System.out.println("Enter the Number not the string");
                 sc.nextLine();
+            } 
+            
+            // close the opened resources
+            finally {
+                sc.close();
             }
+
+            
 
         }
 
