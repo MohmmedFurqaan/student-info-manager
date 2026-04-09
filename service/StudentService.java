@@ -9,7 +9,7 @@ import java.util.List;
 
 public class StudentService {
 
-    // ➕ Add Student
+    // Add Student
     public void addStudent(Student student) throws IOException {
         List<Student> students = FileHandler.readAll();
 
@@ -23,12 +23,12 @@ public class StudentService {
         FileHandler.writeAll(students);
     }
 
-    // 📖 Get All Students
+    // Get All Students
     public List<Student> getAllStudents() throws IOException {
         return FileHandler.readAll();
     }
 
-    // ❌ Delete Student
+    // Delete Student
     public void deleteStudent(int id) throws IOException, StudentNotFoundException {
         List<Student> students = FileHandler.readAll();
 
@@ -41,7 +41,7 @@ public class StudentService {
         FileHandler.writeAll(students);
     }
 
-    // ✏️ Update Student
+    // Update Student
     public void updateStudent(int id, String name, int age, String course)
             throws IOException, StudentNotFoundException {
 

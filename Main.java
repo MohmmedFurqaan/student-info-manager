@@ -10,8 +10,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
         StudentService service = new StudentService();
+
+        Scanner sc = new Scanner(System.in);
 
         while (true) {
             System.out.println("\n1. Add Student");
@@ -27,8 +28,6 @@ public class Main {
                 switch (choice) {
 
                     case 1:
-                        System.out.print("Enter ID: ");
-                        int id = sc.nextInt();
                         sc.nextLine();
 
                         System.out.print("Enter Name: ");
@@ -41,44 +40,73 @@ public class Main {
                         System.out.print("Enter Course: ");
                         String course = sc.nextLine();
 
+                
+                        int id = service.getAllStudents()
+                                .stream()
+                                .mapToInt(Student::getId)
+                                .max()
+                                .orElse(0) + 1;
+
                         service.addStudent(new Student(id, name, age, course));
                         System.out.println("Student added successfully!");
                         break;
 
                     case 2:
-                        System.out.print("Enter ID to delete: ");
-                        int deleteId = sc.nextInt();
+                        List<Student> students_delete = service.getAllStudents();
 
-                        service.deleteStudent(deleteId);
-                        System.out.println("Student deleted!");
-                        break;
+                        if (students_delete.isEmpty()) {
+                            System.out.println("No ID to delete !");
+                            break;
+                        } else {
+                            for (Student s : students_delete) {
+                                System.out.println(s);
+                            }
+                            System.out.print("Enter ID to delete: ");
+                            int deleteId = sc.nextInt();
+
+                            service.deleteStudent(deleteId);
+                            System.out.println("Student deleted!");
+                            break;
+                        }
 
                     case 3:
-                        System.out.print("Enter ID to update: ");
-                        int updateId = sc.nextInt();
-                        sc.nextLine();
-
-                        System.out.print("Enter New Name: ");
-                        String newName = sc.nextLine();
-
-                        System.out.print("Enter New Age: ");
-                        int newAge = sc.nextInt();
-                        sc.nextLine();
-
-                        System.out.print("Enter New Course: ");
-                        String newCourse = sc.nextLine();
-
-                        service.updateStudent(updateId, newName, newAge, newCourse);
-                        System.out.println("Student updated!");
-                        break;
-
-                    case 4:
                         List<Student> students = service.getAllStudents();
 
                         if (students.isEmpty()) {
-                            System.out.println("No records found.");
+                            System.out.println("No ID to update");
+                            break;
+
                         } else {
                             for (Student s : students) {
+                                System.out.println(s);
+                            }
+                            System.out.print("Enter ID to update: ");
+                            int updateId = sc.nextInt();
+                            sc.nextLine();
+
+                            System.out.print("Enter New Name: ");
+                            String newName = sc.nextLine();
+
+                            System.out.print("Enter New Age: ");
+                            int newAge = sc.nextInt();
+                            sc.nextLine();
+
+                            System.out.print("Enter New Course: ");
+                            String newCourse = sc.nextLine();
+
+                            service.updateStudent(updateId, newName, newAge, newCourse);
+                            System.out.println("Student updated!");
+                            break;
+
+                        }
+
+                    case 4:
+                        List<Student> students2 = service.getAllStudents();
+
+                        if (students2.isEmpty()) {
+                            System.out.println("No records found.");
+                        } else {
+                            for (Student s : students2) {
                                 System.out.println(s);
                             }
                         }
